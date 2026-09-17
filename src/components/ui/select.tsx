@@ -83,7 +83,6 @@ const SelectScrollDownButton = ({
 	</SelectPrimitive.ScrollDownArrow>
 );
 
-
 const SelectContent = ({
 	className,
 	children,
@@ -171,7 +170,6 @@ const SelectSeparator = ({
 		{...props}
 	/>
 );
-
 
 export {
 	Select,
