@@ -49,6 +49,11 @@ export const forgotPasswordSchema = z.object({
 });
 export type ForgotPasswordInput = z.input<typeof forgotPasswordSchema>;
 
+export const changeEmailSchema = z.object({
+	newEmail: z.email(),
+});
+export type ChangeEmailInput = z.input<typeof changeEmailSchema>;
+
 export const resetPasswordSchema = z
 	.object({
 		newPassword: passwordSchema,
