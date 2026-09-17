@@ -1,5 +1,5 @@
-import { IconLogout, IconUser } from "@tabler/icons-react";
-import { useRouter } from "@tanstack/react-router";
+import { IconLogout, IconShield, IconUser } from "@tabler/icons-react";
+import { Link, useRouter } from "@tanstack/react-router";
 import { toast } from "react-hot-toast";
 
 import { authClient } from "#/lib/auth-client.ts";
@@ -41,6 +41,16 @@ const SignOutItem = () => {
 	);
 };
 
+const AdminItem = () => (
+	<DropdownMenuItem
+		render={
+			<Link to="/admin">
+				<IconShield className="size-4" /> <span>Admin</span>
+			</Link>
+		}
+	/>
+);
+
 export const UserDropdown = ({ user }: UserDropdownProps) => (
 	<DropdownMenu>
 		<DropdownMenuTrigger
@@ -67,6 +77,8 @@ export const UserDropdown = ({ user }: UserDropdownProps) => (
 				<DropdownMenuLabel>{user.email}</DropdownMenuLabel>
 
 				<DropdownMenuSeparator />
+
+				{user.role === "admin" && <AdminItem />}
 
 				<SignOutItem />
 			</DropdownMenuGroup>
