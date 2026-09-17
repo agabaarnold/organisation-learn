@@ -62,6 +62,7 @@ export const auth = betterAuth({
 		},
 	},
 	plugins: [haveIBeenPwned(), lastLoginMethod(), tanstackStartCookies()],
+	user: { additionalFields: { role: { type: "string", input: false } } },
 });
 
 export type User = typeof auth.$Infer.Session.user;
