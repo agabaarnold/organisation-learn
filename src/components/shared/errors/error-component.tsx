@@ -3,13 +3,13 @@ import { useRouter } from "@tanstack/react-router";
 import type { ErrorComponentProps } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import {
 	Collapsible,
 	CollapsibleContent,
 	CollapsibleTrigger,
-} from "../ui/collapsible";
-import { Spinner } from "../ui/spinner";
+} from "../../ui/collapsible";
+import { Spinner } from "../../ui/spinner";
 
 export const ErrorComponent = ({ error, reset, info }: ErrorComponentProps) => {
 	const router = useRouter();
