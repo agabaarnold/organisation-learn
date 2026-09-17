@@ -60,13 +60,14 @@ const RegisterForm = () => {
 		onSubmit: async ({ value }) => {
 			await authClient.signUp.email({
 				...value,
+				callbackURL: `${window.location.origin}/email-verified`,
 				fetchOptions: {
 					onError: ({ error }) => {
 						toast.error(error.message);
 					},
 					onSuccess: () => {
 						toast.success(
-							"Account created successfully. Proceed to log-in with your credentials"
+							"Account created. Check your email to verify your address."
 						);
 						navigate({ to: "/login", replace: true });
 					},
