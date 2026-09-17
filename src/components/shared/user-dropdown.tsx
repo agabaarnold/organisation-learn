@@ -1,4 +1,4 @@
-import { IconLogout, IconShield, IconUser } from "@tabler/icons-react";
+import { IconLogout, IconUser } from "@tabler/icons-react";
 import { Link, useRouter } from "@tanstack/react-router";
 import { toast } from "react-hot-toast";
 
@@ -41,11 +41,11 @@ const SignOutItem = () => {
 	);
 };
 
-const AdminItem = () => (
+const ProfileItem = () => (
 	<DropdownMenuItem
 		render={
-			<Link to="/admin">
-				<IconShield className="size-4" /> <span>Admin</span>
+			<Link to="/profile">
+				<IconUser className="size-4" /> <span>Profile</span>
 			</Link>
 		}
 	/>
@@ -78,7 +78,7 @@ export const UserDropdown = ({ user }: UserDropdownProps) => (
 
 				<DropdownMenuSeparator />
 
-				{user.role === "admin" && <AdminItem />}
+				<ProfileItem />
 
 				<SignOutItem />
 			</DropdownMenuGroup>
