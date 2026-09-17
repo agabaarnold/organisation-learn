@@ -1,7 +1,7 @@
 import { IconArrowLeft, IconCompass, IconHome } from "@tabler/icons-react";
 import { Link, useRouter } from "@tanstack/react-router";
 
-import { Button, buttonVariants } from "../ui/button";
+import { Button, buttonVariants } from "../../ui/button";
 
 export const NotFoundComponent = () => {
 	const router = useRouter();
