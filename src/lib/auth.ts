@@ -1,4 +1,5 @@
 import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2";
+import { APIError, createAuthMiddleware } from "better-auth/api";
 import { betterAuth } from "better-auth/minimal";
 import { haveIBeenPwned, lastLoginMethod } from "better-auth/plugins";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
@@ -9,6 +10,7 @@ import { schema } from "../db/schema";
 import { ResetPasswordEmail } from "../emails/reset-password-email";
 import { VerificationEmail } from "../emails/verification-email";
 import { env } from "../env";
+import { passwordSchema } from "../features/auth/schema";
 import { sendEmail } from "./mailer";
 
 export const auth = betterAuth({
@@ -50,6 +52,25 @@ export const auth = betterAuth({
 		sendOnSignUp: true,
 		autoSignInAfterVerification: true,
 		expiresIn: 3600,
+	},
+	hooks: {
+		// oxlint-disable-next-line require-await
+		before: createAuthMiddleware(async (ctx) => {
+			if (
+				ctx.path === "/sign-up/email" ||
+				ctx.path === "/reset-password" ||
+				ctx.path === "/change-password"
+			) {
+				const password = ctx.body.password || ctx.body.newPassword;
+
+				const { error } = passwordSchema.safeParse(password);
+				if (error) {
+					throw new APIError("BAD_REQUEST", {
+						message: "Password not strong enough",
+					});
+				}
+			}
+		}),
 	},
 	socialProviders: {
 		google: {
