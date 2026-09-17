@@ -1,5 +1,5 @@
-import { IconLogout, IconShield, IconUser } from "@tabler/icons-react";
-import { Link, useRouter } from "@tanstack/react-router";
+import { IconLogout, IconUser } from "@tabler/icons-react";
+import { useRouter } from "@tanstack/react-router";
 import { toast } from "react-hot-toast";
 
 import { authClient } from "#/lib/auth-client.ts";
@@ -20,6 +20,26 @@ import { Image } from "./image";
 interface UserDropdownProps {
 	user: User;
 }
+
+const SignOutItem = () => {
+	const router = useRouter();
+
+	const handleSignOut = async () => {
+		const { error } = await authClient.signOut();
+		if (error) {
+			toast.error(error.message || "Something went wrong");
+		} else {
+			toast.success("Signed out successfully");
+			router.navigate({ to: "/login" });
+		}
+	};
+
+	return (
+		<DropdownMenuItem onClick={handleSignOut}>
+			<IconLogout className="size-4" /> <span>Sign out</span>
+		</DropdownMenuItem>
+	);
+};
 
 export const UserDropdown = ({ user }: UserDropdownProps) => (
 	<DropdownMenu>
@@ -48,47 +68,8 @@ export const UserDropdown = ({ user }: UserDropdownProps) => (
 
 				<DropdownMenuSeparator />
 
-				<DropdownMenuItem
-					render={
-						<Link to="/profile">
-							<IconUser className="size-4" /> <span>Profile</span>
-						</Link>
-					}
-				/>
-
-				{user.role === "admin" && <AdminItem />}
 				<SignOutItem />
 			</DropdownMenuGroup>
 		</DropdownMenuContent>
 	</DropdownMenu>
 );
-
-const AdminItem = () => (
-	<DropdownMenuItem
-		render={
-			<Link to="/admin">
-				<IconShield className="size-4" /> <span>Admin</span>
-			</Link>
-		}
-	/>
-);
-
-const SignOutItem = () => {
-	const router = useRouter();
-
-	const handleSignOut = async () => {
-		const { error } = await authClient.signOut();
-		if (error) {
-			toast.error(error.message || "Something went wrong");
-		} else {
-			toast.success("Signed out successfully");
-			router.navigate({ to: "/login" });
-		}
-	};
-
-	return (
-		<DropdownMenuItem onClick={handleSignOut}>
-			<IconLogout className="size-4" /> <span>Sign out</span>
-		</DropdownMenuItem>
-	);
-};
