@@ -9,6 +9,7 @@ import { Button } from "../ui/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
+	DropdownMenuGroup,
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
@@ -42,20 +43,22 @@ export const UserDropdown = ({ user }: UserDropdownProps) => (
 		/>
 
 		<DropdownMenuContent align="end" className="w-56">
-			<DropdownMenuLabel>{user.email}</DropdownMenuLabel>
+			<DropdownMenuGroup>
+				<DropdownMenuLabel>{user.email}</DropdownMenuLabel>
 
-			<DropdownMenuSeparator />
+				<DropdownMenuSeparator />
 
-			<DropdownMenuItem
-				render={
-					<Link to="/profile">
-						<IconUser className="size-4" /> <span>Profile</span>
-					</Link>
-				}
-			/>
+				<DropdownMenuItem
+					render={
+						<Link to="/profile">
+							<IconUser className="size-4" /> <span>Profile</span>
+						</Link>
+					}
+				/>
 
-			{user.role === "admin" && <AdminItem />}
-			<SignOutItem />
+				{user.role === "admin" && <AdminItem />}
+				<SignOutItem />
+			</DropdownMenuGroup>
 		</DropdownMenuContent>
 	</DropdownMenu>
 );
