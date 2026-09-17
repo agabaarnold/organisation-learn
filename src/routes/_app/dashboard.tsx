@@ -1,8 +1,8 @@
 // oxlint-disable react/function-component-definition func-style
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
+import { buttonVariants } from "#/components/ui/button.tsx";
 import { EmailVerificationAlert } from "#/features/dashboard/components/email-verification-alert.tsx";
-import { ProfileInformation } from "#/features/dashboard/components/profile-information.tsx";
 
 export const Route = createFileRoute("/_app/dashboard")({
 	component: RouteComponent,
@@ -23,7 +23,9 @@ function RouteComponent() {
 
 				{!user.emailVerified && <EmailVerificationAlert />}
 
-				<ProfileInformation user={user} />
+				<Link className={buttonVariants({ variant: "outline" })} to="/profile">
+					View profile
+				</Link>
 			</div>
 		</main>
 	);
