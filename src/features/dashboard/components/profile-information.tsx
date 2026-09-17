@@ -19,7 +19,7 @@ interface ProfileInformationProps {
 export const ProfileInformation = ({ user }: ProfileInformationProps) => (
 	<Card>
 		<CardHeader>
-			<CardTitle className="flex items-center gap-2">
+			<CardTitle className="flex items-center">
 				<IconUser className="size-5" />
 				Profile Information
 			</CardTitle>
