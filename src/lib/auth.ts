@@ -13,3 +13,5 @@ export const auth = betterAuth({
 	},
 	plugins: [haveIBeenPwned(), lastLoginMethod(), tanstackStartCookies()],
 });
+
+export type User = typeof auth.$Infer.Session.user;
