@@ -4,12 +4,12 @@ import { Link } from "@tanstack/react-router";
 import { buttonVariants } from "#/components/ui/button.tsx";
 
 export const EmailVerificationAlert = () => (
-	<div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-800/50 dark:bg-yellow-950/30">
+	<div className="rounded-lg border border-border bg-muted p-4">
 		<div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 			<div className="flex items-center gap-3">
-				<IconMail className="size-5 shrink-0 text-yellow-600 dark:text-yellow-400" />
+				<IconMail className="size-5 shrink-0 text-muted-foreground" />
 
-				<span className="text-yellow-800 dark:text-yellow-200">
+				<span className="text-sm text-foreground">
 					Please verify your email address to access all features.
 				</span>
 			</div>
